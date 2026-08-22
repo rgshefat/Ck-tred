@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default Deny All Catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // User Document & Subcollections
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // User Deposits Subcollection
+      match /deposits/{depositId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User Timed Trades Subcollection
+      match /timedTrades/{tradeId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User Positions Subcollection
+      match /positions/{positionId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User Invoices Subcollection
+      match /invoices/{invoiceId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User Clients Subcollection
+      match /clients/{clientId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // User Settings/Rules Subcollection
+      match /rules/{ruleId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Optional test connection collection
+    match /test/{docId} {
+      allow read: if true;
+    }
+  }
+}

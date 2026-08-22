@@ -1,0 +1,356 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile, trading wallet, balance and account preferences",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar image URL"
+        },
+        "usdBalance": {
+          "type": "number",
+          "description": "Current USD trading balance"
+        },
+        "bdtBalance": {
+          "type": "number",
+          "description": "Current BDT balance"
+        },
+        "totalDepositedUSD": {
+          "type": "number",
+          "description": "Total lifetime USD deposited"
+        },
+        "totalWithdrawnUSD": {
+          "type": "number",
+          "description": "Total lifetime USD withdrawn"
+        },
+        "totalRealizedPnL": {
+          "type": "number",
+          "description": "Total realized profit and loss"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["userId", "email"]
+    },
+    "Deposit": {
+      "title": "Deposit",
+      "description": "Deposit transaction via bKash, Nagad or Bank",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique transaction ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "User UID who initiated deposit"
+        },
+        "method": {
+          "type": "string",
+          "description": "Payment method used (bkash, nagad, bank_transfer, etc)"
+        },
+        "methodTitle": {
+          "type": "string",
+          "description": "Friendly method display title"
+        },
+        "bdtAmount": {
+          "type": "number",
+          "description": "Amount in Bangladeshi Taka"
+        },
+        "usdAmount": {
+          "type": "number",
+          "description": "Amount credited in USD"
+        },
+        "exchangeRate": {
+          "type": "number",
+          "description": "Exchange rate applied"
+        },
+        "senderNumber": {
+          "type": "string",
+          "description": "Sender phone or account number"
+        },
+        "destinationNumber": {
+          "type": "string",
+          "description": "Merchant/cashier receiving number"
+        },
+        "transactionId": {
+          "type": "string",
+          "description": "Gateway TrxID"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["completed", "pending", "rejected"]
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "confirmedAt": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "userId", "method", "bdtAmount", "usdAmount", "transactionId", "status"]
+    },
+    "TimedTrade": {
+      "title": "TimedTrade",
+      "description": "Up/Down stock or crypto timed binary trade",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Trade ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "User UID"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Stock symbol (e.g. AAPL, NVDA)"
+        },
+        "stockName": {
+          "type": "string",
+          "description": "Asset name"
+        },
+        "direction": {
+          "type": "string",
+          "enum": ["CALL", "PUT"]
+        },
+        "duration": {
+          "type": "string"
+        },
+        "durationSeconds": {
+          "type": "number"
+        },
+        "entryPrice": {
+          "type": "number"
+        },
+        "strikePrice": {
+          "type": "number"
+        },
+        "currentPrice": {
+          "type": "number"
+        },
+        "investedAmount": {
+          "type": "number"
+        },
+        "payoutPercent": {
+          "type": "number"
+        },
+        "startedAt": {
+          "type": "number"
+        },
+        "expiresAt": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "won", "lost"]
+        },
+        "pnl": {
+          "type": "number"
+        },
+        "pnlPercent": {
+          "type": "number"
+        },
+        "settledPrice": {
+          "type": "number"
+        },
+        "resolvedAt": {
+          "type": "string"
+        },
+        "winProbability": {
+          "type": "number"
+        },
+        "lossProbability": {
+          "type": "number"
+        }
+      },
+      "required": ["id", "userId", "symbol", "direction", "investedAmount", "startedAt", "expiresAt", "status"]
+    },
+    "TradingPosition": {
+      "title": "TradingPosition",
+      "description": "Active stock trading position",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "stockName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["BUY", "SELL"]
+        },
+        "shares": {
+          "type": "number"
+        },
+        "entryPrice": {
+          "type": "number"
+        },
+        "currentPrice": {
+          "type": "number"
+        },
+        "investedAmount": {
+          "type": "number"
+        },
+        "currentValue": {
+          "type": "number"
+        },
+        "pnl": {
+          "type": "number"
+        },
+        "pnlPercent": {
+          "type": "number"
+        },
+        "openedAt": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "userId", "symbol", "type", "shares", "entryPrice", "investedAmount"]
+    },
+    "Invoice": {
+      "title": "Invoice",
+      "description": "Multi-currency invoice record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "invoiceNumber": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "issueDate": {
+          "type": "string"
+        },
+        "dueDate": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "totalAmount": {
+          "type": "number"
+        },
+        "totalPaid": {
+          "type": "number"
+        },
+        "balanceDue": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "userId", "invoiceNumber", "status", "totalAmount"]
+    },
+    "Client": {
+      "title": "Client",
+      "description": "Business customer or client record",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "preferredCurrency": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "userId", "name", "email"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "Individual user profile, balance, and trading statistics"
+    },
+    "/users/{userId}/deposits/{depositId}": {
+      "schema": {
+        "$ref": "#/entities/Deposit"
+      },
+      "description": "User deposit transaction history"
+    },
+    "/users/{userId}/timedTrades/{tradeId}": {
+      "schema": {
+        "$ref": "#/entities/TimedTrade"
+      },
+      "description": "Active and completed timed stock trades"
+    },
+    "/users/{userId}/positions/{positionId}": {
+      "schema": {
+        "$ref": "#/entities/TradingPosition"
+      },
+      "description": "User open stock positions"
+    },
+    "/users/{userId}/invoices/{invoiceId}": {
+      "schema": {
+        "$ref": "#/entities/Invoice"
+      },
+      "description": "User global multi-currency invoices"
+    },
+    "/users/{userId}/clients/{clientId}": {
+      "schema": {
+        "$ref": "#/entities/Client"
+      },
+      "description": "User client contact list"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Global Ledger - Invoicing & Financial Hub",
+  "description": "Professional multi-currency invoicing and financial hub featuring real-time stock trading, bKash/Nagad/Bank cashier deposit shop (BDT to USD), automated payment reminders, tax compliance, and banking integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
