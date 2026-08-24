@@ -410,6 +410,39 @@ export const DepositShopView: React.FC<DepositShopViewProps> = ({
               </div>
             </div>
 
+            {/* BENGALI NOTICE BOX: HOW TO SEND MONEY & STRICT AMOUNT WARNING */}
+            <div className="p-4 rounded-2xl bg-amber-50/90 border border-amber-300 space-y-2.5 shadow-2xs">
+              <div className="flex items-center gap-2 text-amber-950 font-black text-xs sm:text-sm">
+                <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 shrink-0" />
+                <span>জরুরি নোটিশ: Send Money করার নিয়ম ও সতর্কবার্তা</span>
+              </div>
+              <div className="space-y-2 text-amber-950 text-xs leading-relaxed">
+                <div className="flex items-start gap-2">
+                  <span className="w-5 h-5 rounded-full bg-amber-200 text-amber-900 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">১</span>
+                  <div>
+                    <strong>শুধুমাত্র "Send Money" (সেন্ড মানি) করুন:</strong> বিকাশ বা নগদ অ্যাপের মূল মেনু থেকে "Send Money" অপশন সিলেক্ট করে টাকা পাঠাবেন। ভুলেও ক্যাশ আউট (Cash Out) বা মোবাইল রিচার্জ করবেন না।
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <span className="w-5 h-5 rounded-full bg-amber-200 text-amber-900 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">২</span>
+                  <div>
+                    <strong>সঠিক টাকার পরিমাণ পাঠাতে হবে:</strong> ফর্মে আপনি যে টাকার পরিমাণ সিলেক্ট করেছেন (যেমন <strong>৳{bdtAmount.toLocaleString()} BDT</strong>), ঠিক <strong>তত টাকাই</strong> পাঠাতে হবে।
+                    <p className="text-red-700 font-black mt-1 bg-red-50 p-2 rounded-lg border border-red-200">
+                      ⚠️ <strong>টাকার পরিমাণ কম দিলে হবে না:</strong> নির্ধারিত অংকের চেয়ে কম টাকা পাঠালে ডিপোজিট সিস্টেম তা গ্রহণ করবে না এবং আপনার রিকোয়েস্ট অটো রিজেক্ট হয়ে যাবে।
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <span className="w-5 h-5 rounded-full bg-amber-200 text-amber-900 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">৩</span>
+                  <div>
+                    <strong>TrxID ও প্রেরক নাম্বার:</strong> টাকা পাঠানো সম্পন্ন হলে আসা এসএমএস থেকে <strong>Transaction ID (TrxID)</strong> কপি করে নিচের ফর্মে বসান। ১-২ মিনিটের মধ্যে ওয়ালেটে ডলার ($ USD) যোগ হয়ে যাবে।
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Step 2: Amount Selection */}
             <div>
               <h2 className="text-xl font-bold text-slate-900">ধাপ ২: টাকার পরিমাণ নির্বাচন করুন</h2>

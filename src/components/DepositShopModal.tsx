@@ -338,23 +338,48 @@ export const DepositShopModal: React.FC<DepositShopModalProps> = ({
                 </div>
 
                 {/* Send Money Number Card */}
-                <div className="p-3.5 rounded-2xl bg-indigo-50/70 border border-indigo-100 space-y-2">
+                <div className="p-3.5 rounded-2xl bg-indigo-50/80 border border-indigo-200 space-y-2">
                   <div className="flex items-center justify-between text-xs text-indigo-950 font-bold">
                     <span>{currentMethod.nameBn} Send Money নাম্বার:</span>
-                    <span className="text-[10px] text-indigo-600">Personal</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-md bg-indigo-200/60 text-indigo-900 font-bold">Personal Account</span>
                   </div>
-                  <div className="flex items-center justify-between bg-white px-3.5 py-2.5 rounded-xl border border-indigo-200">
+                  <div className="flex items-center justify-between bg-white px-3.5 py-2.5 rounded-xl border border-indigo-200 shadow-2xs">
                     <span className="font-mono text-base font-black text-slate-900 tracking-wider">
                       {currentMethod.number}
                     </span>
                     <button
                       type="button"
                       onClick={handleCopyNumber}
-                      className="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1"
+                      className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 shadow-2xs"
                     >
                       {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                      <span>{copied ? 'কপি হয়েছে' : 'কপি'}</span>
+                      <span>{copied ? 'কপি হয়েছে' : 'কপি করুন'}</span>
                     </button>
+                  </div>
+                </div>
+
+                {/* BENGALI NOTICE BOX: HOW TO SEND MONEY & STRICT AMOUNT WARNING */}
+                <div className="p-3.5 rounded-2xl bg-amber-50/90 border border-amber-300 space-y-2 text-xs">
+                  <div className="flex items-center gap-2 text-amber-900 font-black">
+                    <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                    <span>জরুরি নোটিশ: Send Money করার নিয়ম ও নির্দেশাবলী</span>
+                  </div>
+                  <div className="space-y-1.5 text-amber-950 text-[11px] leading-relaxed">
+                    <div className="flex items-start gap-1.5">
+                      <span className="font-bold text-amber-700">১.</span>
+                      <span>বিকাশ/নগদ অ্যাপে গিয়ে অবশ্যই <strong>"Send Money" (সেন্ড মানি)</strong> করবেন। (ক্যাশ আউট বা মোবাইল রিচার্জ করলে সিস্টেমে ডিপোজিট জমা হবে না)।</span>
+                    </div>
+                    <div className="flex items-start gap-1.5">
+                      <span className="font-bold text-amber-700">২.</span>
+                      <span>
+                        সঠিক টাকার পরিমাণ: নিচে আপনি যে অংক নির্ধারণ করবেন (যেমন <strong>৳{bdtAmountInput} টাকা</strong>), ঠিক <strong>তত টাকাই</strong> সেন্ড মানি করতে হবে। 
+                        <span className="text-red-700 font-black block mt-0.5">⚠️ সতর্কবার্তা: টাকার পরিমাণ কম দিলে ডিপোজিট গ্রহণ করা হবে না এবং ট্রানজেকশন বাতিল হয়ে যাবে।</span>
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-1.5">
+                      <span className="font-bold text-amber-700">৩.</span>
+                      <span>টাকা পাঠানো সম্পন্ন হলে ফিরতি SMS থেকে প্রাপ্ত <strong>Transaction ID (TrxID)</strong> এবং আপনার <strong>প্রেরক বিকাশ/নগদ নাম্বার</strong> নিচের বক্সে বসিয়ে কনফার্ম বাটনে চাপ দিন।</span>
+                    </div>
                   </div>
                 </div>
 
@@ -373,8 +398,8 @@ export const DepositShopModal: React.FC<DepositShopModalProps> = ({
                       onClick={() => setBdtAmountInput(p.bdt)}
                       className={`p-2 rounded-xl border text-center transition-all cursor-pointer ${
                         bdtAmountInput === p.bdt
-                          ? 'bg-indigo-600 text-white border-indigo-600 font-bold'
-                          : 'bg-slate-50 border-slate-200 text-slate-700 text-xs'
+                          ? 'bg-indigo-600 text-white border-indigo-600 font-bold shadow-xs'
+                          : 'bg-slate-50 border-slate-200 text-slate-700 text-xs hover:border-slate-300'
                       }`}
                     >
                       <div className="font-mono font-bold text-xs">৳{p.bdt}</div>

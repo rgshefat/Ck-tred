@@ -69,24 +69,35 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="h-16 bg-white border-b border-slate-200 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30 shadow-xs">
       
-      {/* Left: Mobile hamburger & Search bar */}
-      <div className="flex items-center gap-3 sm:gap-4 flex-1">
+      {/* Left: Mobile hamburger, Brand Logo & Search bar */}
+      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
         {/* Mobile menu toggle */}
         <button
           onClick={onToggleMobileMenu}
-          className="lg:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+          className="lg:hidden p-2 rounded-xl text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer shrink-0"
           title="Toggle Navigation Menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
-        {/* Global Quick Search */}
-        <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
+        {/* Mobile Mini Logo */}
+        <div 
+          onClick={() => setActiveTab('trading')}
+          className="flex lg:hidden items-center gap-1.5 cursor-pointer shrink-0"
+        >
+          <div className="w-7 h-7 bg-gradient-to-br from-indigo-600 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-xs">
+            Q
+          </div>
+          <span className="font-bold text-sm text-slate-900 tracking-tight hidden xs:inline">Quill</span>
+        </div>
+
+        {/* Global Quick Search - Hidden on small mobile, expands on desktop */}
+        <div className="relative w-full max-w-[140px] xs:max-w-[200px] sm:max-w-xs md:max-w-md hidden sm:block">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search stocks, invoices, or transactions..."
-            className="w-full pl-9 pr-4 py-1.5 sm:py-2 bg-slate-100 border border-slate-200 rounded-md text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
+            placeholder="Search stocks or invoices..."
+            className="w-full pl-9 pr-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
             onClick={() => {
               if (activeTab !== 'invoices' && activeTab !== 'trading') {
                 setActiveTab('trading');
@@ -97,18 +108,18 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Right: Live Wallet Balance, Deposit Trigger, Base Selector, Auth & Actions */}
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
         
         {/* Live Wallet Balance Pill */}
         {wallet && (
           <div 
             onClick={() => setActiveTab('trading')}
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl cursor-pointer transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl cursor-pointer transition-colors shrink-0"
             title="Click to open Stock Trading Terminal"
           >
-            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
             <div className="text-right">
-              <div className="text-[10px] text-slate-400 font-semibold uppercase leading-none">ব্যালেন্স</div>
+              <div className="hidden sm:block text-[9px] text-slate-400 font-semibold uppercase leading-none">ব্যালেন্স</div>
               <div className="font-mono font-bold text-xs text-slate-900 leading-tight">
                 ${wallet.usdBalance.toFixed(2)}
               </div>
@@ -120,26 +131,26 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           id="header-deposit-btn"
           onClick={onOpenDepositShop}
-          className="flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl bg-pink-50 hover:bg-pink-100 border border-pink-200 text-pink-700 text-xs font-bold transition-all cursor-pointer shadow-2xs"
+          className="flex items-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-pink-50 hover:bg-pink-100 border border-pink-200 text-pink-700 text-xs font-bold transition-all cursor-pointer shadow-2xs shrink-0"
           title="Deposit funds via bKash, Nagad or Bank"
         >
-          <DollarSign className="w-3.5 h-3.5 text-pink-600" />
-          <span className="whitespace-nowrap">ডিপোজিট</span>
+          <DollarSign className="w-3.5 h-3.5 text-pink-600 shrink-0" />
+          <span className="whitespace-nowrap font-sans text-xs">ডিপোজিট</span>
         </button>
 
-        {/* Quick Withdraw Button (উইথড্রয়াল) */}
+        {/* Quick Withdraw Button (উইথড্রয়াল) - Visible on larger screens */}
         <button
           id="header-withdraw-btn"
           onClick={onOpenWithdraw || onOpenDepositShop}
-          className="flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 text-xs font-bold transition-all cursor-pointer shadow-2xs"
+          className="hidden md:flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 text-xs font-bold transition-all cursor-pointer shadow-2xs shrink-0"
           title="Withdraw funds to bKash or Nagad"
         >
-          <ArrowDownLeft className="w-3.5 h-3.5 text-amber-600 rotate-180" />
+          <ArrowDownLeft className="w-3.5 h-3.5 text-amber-600 rotate-180 shrink-0" />
           <span className="whitespace-nowrap">উইথড্রয়াল</span>
         </button>
 
         {/* Base Currency Selector */}
-        <div className="hidden md:flex items-center gap-1.5 bg-slate-100 rounded-md px-2.5 py-1.5 border border-slate-200 text-xs">
+        <div className="hidden lg:flex items-center gap-1.5 bg-slate-100 rounded-xl px-2.5 py-1.5 border border-slate-200 text-xs">
           <Globe2 className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
           <label htmlFor="header-base-currency" className="text-slate-500 text-[11px] font-medium">Base:</label>
           <select
@@ -160,21 +171,21 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           id="header-ai-draft-btn"
           onClick={onOpenAiDraft}
-          className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-md bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-semibold transition-all cursor-pointer"
+          className="hidden xl:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-semibold transition-all cursor-pointer shrink-0"
           title="Generate invoice using Gemini AI"
         >
           <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
           <span>AI Draft</span>
         </button>
 
-        {/* Primary Action: Create New Invoice */}
+        {/* Primary Action: Create New Invoice (Desktop) */}
         <button
           id="header-create-invoice-btn"
           onClick={onOpenCreateInvoice}
-          className="flex items-center gap-1.5 bg-indigo-600 text-white px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-semibold shadow-sm hover:bg-indigo-700 transition-all cursor-pointer"
+          className="hidden sm:flex items-center gap-1.5 bg-indigo-600 text-white px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-semibold shadow-xs hover:bg-indigo-700 transition-all cursor-pointer shrink-0"
         >
-          <Plus className="w-4 h-4" />
-          <span className="hidden sm:inline whitespace-nowrap">New Invoice</span>
+          <Plus className="w-3.5 h-3.5" />
+          <span className="whitespace-nowrap">New Invoice</span>
         </button>
 
         {/* Authentication & User Profile Button */}

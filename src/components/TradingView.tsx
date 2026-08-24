@@ -1109,46 +1109,46 @@ export const TradingView: React.FC<TradingViewProps> = ({
       <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
         
         {/* Tab Headers */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
-          <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-100 bg-slate-50/50 overflow-x-auto">
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             <button
               onClick={() => setActiveBottomTab('timed')}
-              className={`text-sm font-bold pb-1 transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`text-xs sm:text-sm font-bold pb-1 transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
                 activeBottomTab === 'timed'
                   ? 'text-indigo-600 border-b-2 border-indigo-600'
                   : 'text-slate-500 hover:text-slate-800'
               }`}
             >
-              <Timer className="w-4 h-4" />
-              <span>চলমান টাইমড ট্রেডস ({timedTrades.length})</span>
+              <Timer className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>টাইমড ট্রেড ({timedTrades.length})</span>
             </button>
 
             <button
               onClick={() => setActiveBottomTab('positions')}
-              className={`text-sm font-bold pb-1 transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`text-xs sm:text-sm font-bold pb-1 transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
                 activeBottomTab === 'positions'
                   ? 'text-indigo-600 border-b-2 border-indigo-600'
                   : 'text-slate-500 hover:text-slate-800'
               }`}
             >
-              <Layers className="w-4 h-4" />
-              <span>ওপেন স্পট পজিশন ({positions.length})</span>
+              <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>স্পট পজিশন ({positions.length})</span>
             </button>
 
             <button
               onClick={() => setActiveBottomTab('history')}
-              className={`text-sm font-bold pb-1 transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`text-xs sm:text-sm font-bold pb-1 transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
                 activeBottomTab === 'history'
                   ? 'text-indigo-600 border-b-2 border-indigo-600'
                   : 'text-slate-500 hover:text-slate-800'
               }`}
             >
-              <Clock className="w-4 h-4" />
-              <span>সম্পন্ন ট্রেড হিস্টোরি ({closedTrades.length})</span>
+              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>ট্রেড হিস্টোরি ({closedTrades.length})</span>
             </button>
           </div>
 
-          <span className="text-xs text-slate-500 font-mono hidden sm:inline-block">
+          <span className="text-xs text-slate-500 font-mono hidden md:inline-block shrink-0 ml-4">
             স্বয়ংক্রিয় সেটেলমেন্ট সিঙ্ক
           </span>
         </div>

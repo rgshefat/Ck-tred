@@ -15,6 +15,15 @@ import {
   Stock,
   DepositPaymentMethod 
 } from './types';
+import { 
+  TrendingUp, 
+  DollarSign, 
+  FileText, 
+  ArrowUpRight, 
+  Menu as MenuIcon,
+  Layers,
+  Wallet as WalletIcon
+} from 'lucide-react';
 import { StorageService } from './services/storageService';
 import { FXService } from './services/fxService';
 import { FirebaseSyncService } from './services/firebaseSyncService';
@@ -512,7 +521,7 @@ function AppContent() {
         />
 
         {/* Content Container */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-3 sm:p-5 lg:p-8 pb-24 sm:pb-24 lg:pb-8 max-w-7xl w-full mx-auto overflow-x-hidden">
           
           {/* STOCK TRADING VIEW */}
           {activeTab === 'trading' && (
@@ -633,8 +642,63 @@ function AppContent() {
 
         </main>
 
+        {/* Mobile Sticky Bottom Navigation Bar */}
+        <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1.5 flex items-center justify-around shadow-lg">
+          <button
+            onClick={() => setActiveTab('trading')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-[10px] font-bold transition-all cursor-pointer ${
+              activeTab === 'trading'
+                ? 'text-indigo-600 font-black'
+                : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <TrendingUp className={`w-4 h-4 mb-0.5 ${activeTab === 'trading' ? 'text-indigo-600 stroke-[2.5]' : 'text-slate-400'}`} />
+            <span>ট্রেডিং</span>
+          </button>
+
+          <button
+            onClick={() => setIsDepositShopOpen(true)}
+            className="flex flex-col items-center justify-center py-1 px-3 rounded-2xl bg-gradient-to-r from-pink-600 to-rose-600 text-white text-[10px] font-black shadow-md shadow-pink-500/20 active:scale-95 transition-all cursor-pointer"
+          >
+            <DollarSign className="w-4 h-4 stroke-[3] mb-0.5" />
+            <span>ডিপোজিট</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('shop')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-[10px] font-bold transition-all cursor-pointer ${
+              activeTab === 'shop'
+                ? 'text-amber-700 font-black'
+                : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <ArrowUpRight className={`w-4 h-4 mb-0.5 ${activeTab === 'shop' ? 'text-amber-600 stroke-[2.5]' : 'text-slate-400'}`} />
+            <span>উইথড্র</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('invoices')}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-[10px] font-bold transition-all cursor-pointer ${
+              activeTab === 'invoices'
+                ? 'text-indigo-600 font-black'
+                : 'text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <FileText className={`w-4 h-4 mb-0.5 ${activeTab === 'invoices' ? 'text-indigo-600 stroke-[2.5]' : 'text-slate-400'}`} />
+            <span>ইনভয়েস</span>
+          </button>
+
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-[10px] font-bold text-slate-500 hover:text-slate-800 transition-all cursor-pointer"
+          >
+            <MenuIcon className="w-4 h-4 text-slate-400 mb-0.5" />
+            <span>মেনু</span>
+          </button>
+        </nav>
+
         {/* Professional Footer */}
-        <footer className="border-t border-slate-200 bg-white py-4 px-6 sm:px-8 text-slate-500 text-xs flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto">
+        <footer className="border-t border-slate-200 bg-white py-4 px-4 sm:px-8 text-slate-500 text-xs flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto hidden lg:flex">
           <p className="font-medium text-slate-600">
             QuillInvoice™ Global Multi-Currency Invoicing, Real-Time Stock Trading & bKash/Nagad Cashier Desk
           </p>
